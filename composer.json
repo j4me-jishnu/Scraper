@@ -1,0 +1,30 @@
+{
+  "name": "j4me-jishnu/scraper",
+  "description": "PHP web scraper",
+  "version": "1.0.0",
+  "type": "library",
+  "keywords": [
+    "php",
+    "web",
+    "scraper"
+  ],
+  "license": "MIT",
+  "authors": [{
+    "name": "Jishnu",
+    "email": "j4me-jishnu@gmail.com",
+    "role": "developer"
+  }],
+  "scripts":{
+    "test":"composer dump-autoload 1>/dev/null && vendor/bin/phpunit --testdox --colors=always --bootstrap vendor/autoload.php tests/"
+  },
+  "require": {
+    "php": ">=7.2.0",
+    "phpunit/phpunit": "^8.5"
+  },
+  "autoload": {
+    "classmap": [
+      "app",
+      "libraries"
+    ]
+  }
+}
