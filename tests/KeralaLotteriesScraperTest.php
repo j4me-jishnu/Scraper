@@ -9,7 +9,6 @@ final class KeralaLotteriesScraperTest extends TestCase{
   }
 
   protected function setUp():void{
-
   }
 
   public function testCanCreateApp(): void{
@@ -27,6 +26,20 @@ final class KeralaLotteriesScraperTest extends TestCase{
       count($links)
     );
   }
+
+  public function testAppCannotGetDataIfNoLink(): void{
+      $this->expectExceptionMessage('Invalid link');
+      $link="";
+      self::$app->extractPDF($link);
+  }
+  public function testCanGetPdf(): void{
+    $data = "http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560";
+    $pdf_data=self::$app->extractPDF($data);
+    print_r($pdf_data);
+    $this->assertEquals($pdf_data, true);
+  }
+
+
 
   protected function tearDown():void{
   }

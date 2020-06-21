@@ -36,4 +36,16 @@ class KeralaLotteriesScraper{
     }
     return $links;
   }
+  public function extractPDF($link){
+    if(trim($link)==""){
+      throw new Exception("Invalid link", 1);
+    }
+    else{
+      return $pdf_data = file_get_contents('http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560');
+    }
+
+  }
+  public function getDataFromPdf($pdf_data){
+
+  }
 }

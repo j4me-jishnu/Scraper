@@ -18,13 +18,15 @@
     "test":"composer dump-autoload 1>/dev/null && vendor/bin/phpunit --testdox --colors=always --bootstrap vendor/autoload.php tests/"
   },
   "require": {
-    "php": ">=7.2.0",
-    "phpunit/phpunit": "^8.5"
+    "php": ">=7.2.0"
   },
   "autoload": {
     "classmap": [
       "app",
       "libraries"
     ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7"
   }
 }
