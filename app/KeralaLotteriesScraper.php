@@ -1,5 +1,4 @@
 <?php declare(strict_types=1);
-
 use SimpleHtmlDomWrapper as SimpleHtmlDomWrapper;
 use PdfToText as PdfToText;
 
@@ -45,6 +44,10 @@ class KeralaLotteriesScraper{
       $draw_number = substr($link, -5, strpos($link, "drawno="));
       return $new_link = "http://103.251.43.52/lottery/reports/draw/tmp{$draw_number}.pdf";
     }
+  }
+  public function convertPdfDataIntoString($pdf_link){
+    $pdf = new PdfToText($link);
+    return $data = $pdf->Text;
   }
 
 

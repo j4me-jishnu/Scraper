@@ -37,6 +37,10 @@ final class KeralaLotteriesScraperTest extends TestCase{
     $link = "";
     self::$app->convertlinkToPdfLink($link);
   }
+  public function testAppCanConvertPdfToText(): void{
+    $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
+    self::$app->convertPdfDataIntoString($link);
+  }
 
 
 
