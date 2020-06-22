@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use SimpleHtmlDomWrapper as SimpleHtmlDomWrapper;
+use PdfToText as PdfToText;
 
 class KeralaLotteriesScraper{
   private function is_direct_link($link){
@@ -36,16 +37,18 @@ class KeralaLotteriesScraper{
     }
     return $links;
   }
-  public function extractPDF($link){
+  public function convertlinkToPdfLink($link){
     if(trim($link)==""){
-      throw new Exception("Invalid link", 1);
+      throw new Exception("Invalid Link", 1);
     }
     else{
-      return $pdf_data = file_get_contents('http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560');
+      $draw_number = substr($link, -5, strpos($link, "drawno="));
+      return $new_link = "http://103.251.43.52/lottery/reports/draw/tmp{$draw_number}.pdf";
     }
-
   }
-  public function getDataFromPdf($pdf_data){
 
-  }
+
+
+
+
 }
