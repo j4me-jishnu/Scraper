@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 use SimpleHtmlDomWrapper as SimpleHtmlDomWrapper;
-use PdfToText as PdfToText;
 
 class KeralaLotteriesScraper{
   private function is_direct_link($link){
@@ -46,8 +45,10 @@ class KeralaLotteriesScraper{
     }
   }
   public function convertPdfDataIntoString($pdf_link){
-    $pdf = new PdfToText($link);
-    return $data = $pdf->Text;
+    $pdf = file_get_contents($pdf_link);
+    if($pdf){
+      return true;
+    }
   }
 
 
