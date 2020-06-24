@@ -35,13 +35,27 @@ class KeralaLotteriesScraper{
     }
     return $links;
   }
-  public function convertlinkToPdfLink($link){
+  // public function convertlinkToPdfLink($link){
+  //   if(trim($link)==""){
+  //     throw new Exception("Invalid Link", 1);
+  //   }
+  //   else{
+  //     $draw_number = substr($link, -5, strpos($link, "drawno="));
+  //     return $new_link = "http://103.251.43.52/lottery/reports/draw/tmp{$draw_number}.pdf";
+  //   }
+  // }
+  public function getPdf($link){
     if(trim($link)==""){
       throw new Exception("Invalid Link", 1);
     }
     else{
-      $draw_number = substr($link, -5, strpos($link, "drawno="));
-      return $new_link = "http://103.251.43.52/lottery/reports/draw/tmp{$draw_number}.pdf";
+      $context = stream_context_create(array ('http' => array(
+            'follow_location' => true,
+            'max_redirects' => 20
+        )));
+      if($result = file_get_contents($link, false, $context)){
+        return true;
+      }
     }
   }
   public function convertPdfDataIntoString($pdf_link){

@@ -27,21 +27,21 @@ final class KeralaLotteriesScraperTest extends TestCase{
     );
   }
 
-  public function testCanConvertLinkToPdfLink(): void{
+  public function testCanGetPdf(): void{
     $link = "http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560";
-    $pdf_link = self::$app->convertlinkToPdfLink($link);
-    $this->assertEquals($pdf_link, "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf");
+    $pdf_data = self::$app->getPdf($link);
+    $this->assertEquals($pdf_data, true);
   }
-  public function testCannotConvertlinkIfNoLink(): void{
+  public function testCannotGetPdfIfNoLink(): void{
     $this->expectExceptionMessage("Invalid Link");
     $link = "";
-    self::$app->convertlinkToPdfLink($link);
+    self::$app->getPdf($link);
   }
-  public function testAppCanConvertPdfToText(): void{
-    $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
-    $result = self::$app->convertPdfDataIntoString($link);
-    $this->assertEquals($result, true);
-  }
+  // public function testAppCanConvertPdfToText(): void{
+  //   $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
+  //   $result = self::$app->convertPdfDataIntoString($link);
+  //   $this->assertEquals($result, true);
+  // }
 
 
 
