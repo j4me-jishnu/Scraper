@@ -20,7 +20,6 @@ final class KeralaLotteriesScraperTest extends TestCase{
 
   public function testCanGetResultLinks(): void{
     $links=self::$app->getResultLinks();
-    // print_r($links);
     $this->assertEquals(
       10,
       count($links)
