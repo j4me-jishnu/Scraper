@@ -58,11 +58,9 @@ class KeralaLotteriesScraper{
   }
 
   public function PdfToText($pdf_data){
-    $parser = new \Smalot\PdfParser\Parser();
-    $pdf    = $parser->parseFile($pdf_data);
-    if($text = $pdf->getText()){
-      return true;
-    }
+    $parser=new \Smalot\PdfParser\Parser();
+    $pdf=$parser->parseContent($pdf_data);
+    return $pdf->getText();
   }
 
   public function getWinningSlot($text, $regex){

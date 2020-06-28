@@ -40,10 +40,14 @@ final class KeralaLotteriesScraperTest extends TestCase{
     self::$app->getPdf("");
   }
 
-  public function testPdftoText(): void{
-    $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
-    $readed_data = self::$app->PdfToText($link);
-    $this->assertEquals($readed_data, true);
+  public function testCanConvertPdfToText(): void{
+    $links=self::$app->getResultLinks();
+    $pdf=self::$app->getPdf($links[0]);
+    $text=self::$app->PdfToText($pdf);
+    $this->assertStringContainsString(
+      'KERALA STATE LOTTERIES - RESULT',
+      $text
+    );
   }
 
   protected function tearDown():void{
