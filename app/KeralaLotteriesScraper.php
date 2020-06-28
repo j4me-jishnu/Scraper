@@ -1,7 +1,9 @@
 <?php declare(strict_types=1);
+include 'vendor/autoload.php';
 use SimpleHtmlDomWrapper as SimpleHtmlDomWrapper;
 
 class KeralaLotteriesScraper{
+  public $pdf_data = "";
   private function is_direct_link($link){
     return strpos($link,'.pdf')!==FALSE;
   }
@@ -35,15 +37,7 @@ class KeralaLotteriesScraper{
     }
     return $links;
   }
-  // public function convertlinkToPdfLink($link){
-  //   if(trim($link)==""){
-  //     throw new Exception("Invalid Link", 1);
-  //   }
-  //   else{
-  //     $draw_number = substr($link, -5, strpos($link, "drawno="));
-  //     return $new_link = "http://103.251.43.52/lottery/reports/draw/tmp{$draw_number}.pdf";
-  //   }
-  // }
+
   public function getPdf($link){
     if(trim($link)==""){
       throw new Exception("Invalid Link", 1);
@@ -54,16 +48,24 @@ class KeralaLotteriesScraper{
             'max_redirects' => 20
         )));
       if($result = file_get_contents($link, false, $context)){
+        $this->pdf_data = $result;
         return true;
       }
     }
   }
-  public function convertPdfDataIntoString($pdf_link){
-    $pdf = file_get_contents($pdf_link);
-    if($pdf){
+
+  public function PdfToText($pdf_data){
+    $parser = new \Smalot\PdfParser\Parser();
+    $pdf    = $parser->parseFile($pdf_data);
+    if($text = $pdf->getText()){
       return true;
     }
   }
+
+  public function getWinningSlot($text, $regex){
+
+  }
+
 
 
 

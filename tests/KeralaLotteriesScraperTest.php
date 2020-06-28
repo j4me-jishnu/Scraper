@@ -28,7 +28,8 @@ final class KeralaLotteriesScraperTest extends TestCase{
   }
 
   public function testCanGetPdf(): void{
-    $link = "http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560";
+    $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
+    // $link = "http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560";
     $pdf_data = self::$app->getPdf($link);
     $this->assertEquals($pdf_data, true);
   }
@@ -37,29 +38,12 @@ final class KeralaLotteriesScraperTest extends TestCase{
     $link = "";
     self::$app->getPdf($link);
   }
-  // public function testAppCanConvertPdfToText(): void{
-  //   $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
-  //   $result = self::$app->convertPdfDataIntoString($link);
-  //   $this->assertEquals($result, true);
-  // }
 
-
-
-
-
-
-  // public function testAppCannotGetDataIfNoLink(): void{
-  //     $this->expectExceptionMessage('Invalid link');
-  //     $link="";
-  //     self::$app->extractPDF($link);
-  // }
-  // public function testCanGetPdf(): void{
-  //   $data = "http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560";
-  //   $pdf_data=self::$app->extractPDF($data);
-  //   print_r($pdf_data);
-  //   $this->assertEquals($pdf_data, true);
-  // }
-
+  public function testPdftoText(): void{
+    $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
+    $readed_data = self::$app->PdfToText($link);
+    $this->assertEquals($readed_data, true);
+  }
 
 
   protected function tearDown():void{
