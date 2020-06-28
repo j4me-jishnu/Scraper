@@ -33,6 +33,7 @@ final class KeralaLotteriesScraperTest extends TestCase{
     $pdf_data = self::$app->getPdf($link);
     $this->assertEquals($pdf_data, true);
   }
+
   public function testCannotGetPdfIfNoLink(): void{
     $this->expectExceptionMessage("Invalid Link");
     $link = "";
@@ -44,7 +45,6 @@ final class KeralaLotteriesScraperTest extends TestCase{
     $readed_data = self::$app->PdfToText($link);
     $this->assertEquals($readed_data, true);
   }
-
 
   protected function tearDown():void{
   }

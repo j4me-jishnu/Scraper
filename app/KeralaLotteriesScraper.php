@@ -4,6 +4,7 @@ use SimpleHtmlDomWrapper as SimpleHtmlDomWrapper;
 
 class KeralaLotteriesScraper{
   public $pdf_data = "";
+  
   private function is_direct_link($link){
     return strpos($link,'.pdf')!==FALSE;
   }
@@ -65,10 +66,5 @@ class KeralaLotteriesScraper{
   public function getWinningSlot($text, $regex){
 
   }
-
-
-
-
-
 
 }
