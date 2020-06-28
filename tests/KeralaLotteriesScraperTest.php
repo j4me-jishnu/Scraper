@@ -37,8 +37,7 @@ final class KeralaLotteriesScraperTest extends TestCase{
 
   public function testCannotGetPdfIfNoLink(): void{
     $this->expectExceptionMessage("Invalid Link");
-    $link = "";
-    self::$app->getPdf($link);
+    self::$app->getPdf("");
   }
 
   public function testPdftoText(): void{
