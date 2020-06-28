@@ -27,10 +27,12 @@ final class KeralaLotteriesScraperTest extends TestCase{
   }
 
   public function testCanGetPdf(): void{
-    $link = "http://103.251.43.52/lottery/reports/draw/tmp70560.pdf";
-    // $link = "http://103.251.43.52/lottery/reports/resultentryeport1.php?drawno1=70560&drawno=70560";
-    $pdf_data = self::$app->getPdf($link);
-    $this->assertEquals($pdf_data, true);
+    $links=self::$app->getResultLinks();
+    $pdf=self::$app->getPdf($links[0]);
+    $this->assertNotEquals(
+      false,
+      $pdf
+    );
   }
 
   public function testCannotGetPdfIfNoLink(): void{

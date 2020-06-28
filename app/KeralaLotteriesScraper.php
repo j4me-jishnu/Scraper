@@ -3,8 +3,12 @@ include 'vendor/autoload.php';
 use SimpleHtmlDomWrapper as SimpleHtmlDomWrapper;
 
 class KeralaLotteriesScraper{
-  public $pdf_data = "";
-  
+  private function get_redirect_link($response,$link){
+    preg_match("/\'(.*?)\'/si",$response,$redirect_url);
+    preg_match("/(http.*\/)/si",$link,$pre);
+    return "{$pre[1]}{$redirect_url[1]}";
+  }
+
   private function is_direct_link($link){
     return strpos($link,'.pdf')!==FALSE;
   }
@@ -41,18 +45,16 @@ class KeralaLotteriesScraper{
 
   public function getPdf($link){
     if(trim($link)==""){
-      throw new Exception("Invalid Link", 1);
+      throw new Exception("Invalid Link");
     }
-    else{
-      $context = stream_context_create(array ('http' => array(
-            'follow_location' => true,
-            'max_redirects' => 20
-        )));
-      if($result = file_get_contents($link, false, $context)){
-        $this->pdf_data = $result;
-        return true;
-      }
-    }
+    $context=stream_context_create([
+      'http'=>[
+        'follow_location'=>true
+      ]
+    ]);
+    $response=file_get_contents($link,false,$context);
+    $redirect_url=$this->get_redirect_link($response,$link);
+    return file_get_contents($redirect_url,false,$context);
   }
 
   public function PdfToText($pdf_data){
