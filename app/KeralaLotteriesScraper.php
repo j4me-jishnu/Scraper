@@ -63,8 +63,14 @@ class KeralaLotteriesScraper{
     return $pdf->getText();
   }
 
-  public function getWinningSlot($text, $regex){
+  public function getSlotFromText($text, $regex){
 
   }
 
+  public function getResultSlotFromText($text){
+    $regex = '/1st Prize(.*?)[\s][A-Z]{2}[\s]\d{6}/';
+    preg_match_all($regex, $text, $array);
+    print_r(substr($array[0][0],-3));
+    return substr($array[0][0],-3);
+  }
 }

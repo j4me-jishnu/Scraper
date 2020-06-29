@@ -50,6 +50,14 @@ final class KeralaLotteriesScraperTest extends TestCase{
     );
   }
 
+  public function testCanGetResultSlotFromText(): void{
+    $links=self::$app->getResultLinks();
+    $pdf=self::$app->getPdf($links[0]);
+    $text=self::$app->PdfToText($pdf);
+    $result=self::$app->getResultSlotFromText($text);
+    $this->assertNotEquals(false,$result);
+  }
+
   protected function tearDown():void{
   }
 
