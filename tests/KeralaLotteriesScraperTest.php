@@ -58,6 +58,11 @@ final class KeralaLotteriesScraperTest extends TestCase{
     $this->assertNotEquals(false,$result);
   }
 
+  public function testCanValidateLink(): void{
+    $this->expectExceptionMessage("No links found");
+    self::$app->CannotGetDataIfNoLinksAvailable("");
+  }
+
   protected function tearDown():void{
   }
 

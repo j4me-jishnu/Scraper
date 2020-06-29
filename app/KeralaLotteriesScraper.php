@@ -70,7 +70,12 @@ class KeralaLotteriesScraper{
   public function getResultSlotFromText($text){
     $regex = '/1st Prize(.*?)[\s][A-Z]{2}[\s]\d{6}/';
     preg_match_all($regex, $text, $array);
-    print_r(substr($array[0][0],-3));
     return substr($array[0][0],-3);
+  }
+
+  public function CannotGetDataIfNoLinksAvailable($link){
+    if(empty($link)){
+      throw new Exception("No links found");;
+    }
   }
 }
