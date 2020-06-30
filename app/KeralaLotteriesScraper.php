@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 include 'vendor/autoload.php';
 use SimpleHtmlDomWrapper as SimpleHtmlDomWrapper;
-
 class KeralaLotteriesScraper{
   private function get_redirect_link($response,$link){
     preg_match("/\'(.*?)\'/si",$response,$redirect_url);
@@ -63,10 +62,6 @@ class KeralaLotteriesScraper{
     return $pdf->getText();
   }
 
-  public function getSlotFromText($text, $regex){
-
-  }
-
   public function getResultSlotFromText($text){
     $regex = '/1st Prize(.*?)[\s][A-Z]{2}[\s]\d{6}/';
     preg_match_all($regex, $text, $array);
@@ -75,7 +70,8 @@ class KeralaLotteriesScraper{
 
   public function CannotGetDataIfNoLinksAvailable($link){
     if(empty($link)){
-      throw new Exception("No links found");;
+      throw new Exception("No links found");
     }
   }
+
 }

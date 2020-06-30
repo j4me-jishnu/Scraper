@@ -69,4 +69,5 @@ final class KeralaLotteriesScraperTest extends TestCase{
   public static function tearDownAfterClass():void{
   }
 
+
 }
